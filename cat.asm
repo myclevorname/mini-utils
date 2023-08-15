@@ -15,6 +15,7 @@ _start:
 	mov r12d, [rsp]
 	lea r13, [rsp + 8]
 	xor ebx, ebx
+	mov rbp, read_buffer
 	cmp r12d, 1
 	je read_stdin
 
@@ -25,7 +26,7 @@ _start:
 		mov r15, [rsp + 8 * rbx + 8]	; rbx is pre-incremented
 						; r13 already equals rsp + 8
 		mov ax, [r15]
-		cmp ax, '-' + 0 * 256	; little endian so r15l stores first byte
+		cmp ax, '-' + 0 * 256	; little endian so al stores first byte
 		je read_stdin
 		mov eax, SYS_OPEN
 		mov rsi, r13
@@ -39,20 +40,20 @@ _start:
 		read_file:
 			xor eax, eax	; SYS_READ = 0
 			mov edi, r14d
-			mov rsi, read_buffer
+			mov rsi, rbp
 			mov rdx, FILE_READ_SIZE
 			syscall
-			cmp rax, -4096
+			cmp rax, ERRNO_MIN
 			jae error
 			cmp rax, 0
 			je open_file
 		write_stdout:
 			mov rdx, rax
-			mov rsi, read_buffer
+			mov rsi, rbp
 			mov edi, stdout
-			mov eax, 1
+			mov eax, edi	; SYS_WRITE = 1
 			syscall
-			cmp rax, -4096
+			cmp rax, ERRNO_MIN
 			jae error
 			jmp read_file
 	end_loop:
@@ -62,6 +63,7 @@ _start:
 		syscall
 error:
 	movsx rdi, eax
+	neg rdi
 	jmp error_exit
 read_stdin:
 	xor r14d, r14d	; stdin = 0
