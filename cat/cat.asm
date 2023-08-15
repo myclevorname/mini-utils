@@ -1,4 +1,4 @@
-%include "linux_syscalls.inc"
+%include "../linux_syscalls.inc"
 
 FILE_READ_SIZE equ 1024
 
