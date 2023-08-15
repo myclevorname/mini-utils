@@ -5,6 +5,7 @@
 %define SYS_READ 0
 %define SYS_OPEN 2
 %define SYS_EXIT 60
+%define SYS_MKDIR 83
 
 ; File open attributes
 %define O_RDONLY 0
