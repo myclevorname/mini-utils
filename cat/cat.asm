@@ -4,10 +4,6 @@ FILE_READ_SIZE equ 1024
 
 global _start
 
-section .bss
-
-read_buffer resb FILE_READ_SIZE
-
 section .text
 	; int argc = dword ptr [rsp] = r12d
 	; char *argv[] = rsp + 8 = r13
@@ -15,7 +11,8 @@ _start:
 	mov r12d, [rsp]
 	lea r13, [rsp + 8]
 	xor ebx, ebx
-	mov rbp, read_buffer
+	sub rsp, FILE_READ_SIZE
+	mov rbp, rsp
 	cmp r12d, 1
 	je read_stdin
 
@@ -23,8 +20,7 @@ _start:
 		inc rbx
 		cmp rbx, r12
 		jae end_loop
-		mov r15, [rsp + 8 * rbx + 8]	; rbx is pre-incremented
-						; r13 already equals rsp + 8
+		mov r15, [r13 + 8 * rbx]	; rbx is pre-incremented
 		mov ax, [r15]
 		cmp ax, '-' + 0 * 256	; little endian so al stores first byte
 		je read_stdin
