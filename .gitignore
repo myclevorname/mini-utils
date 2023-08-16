@@ -1,0 +1,7 @@
+# ELF files
+*/*.o
+cat/cat
+mkrmdirfile/mkdir
+mkrmdirfile/rmdir
+mkrmdirfile/rm
+mkrmdirfile/touch

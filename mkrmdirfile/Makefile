@@ -32,8 +32,8 @@ touch.o: touch.asm base.asm ../linux_syscalls.inc
 #	nasm -f elf64 -o cat-debug.o cat.asm -g
 
 clean:
-	rm -f mkdir rmdir rm
-	rm -f mkdir.o rmdir.o rm.o
+	rm -f touch mkdir rmdir rm
+	rm -f touch mkdir.o rmdir.o rm.o
 #	rm -f cat-debug.o cat-debug
 
 #debug: cat-debug
