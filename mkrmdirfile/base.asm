@@ -14,9 +14,13 @@ _start:
 		jae exit
 
 		mov rdi, [rsp + 8 + 8 * rbp]	; rbp is post-incremented
+		%if SYS_WANTED = SYS_CREAT
+		mov esi, 0q0666
+		%elif SYS_WANTED = SYS_MKDIR
 		mov esi, 0q0777
+		%endif
 		xor eax, eax
-		mov al, SYS_MKDIR
+		mov al, SYS_WANTED
 		syscall
 
 		cmp eax, ERRNO_MIN

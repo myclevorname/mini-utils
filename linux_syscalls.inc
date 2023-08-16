@@ -6,6 +6,9 @@
 %define SYS_OPEN 2
 %define SYS_EXIT 60
 %define SYS_MKDIR 83
+%define SYS_RMDIR 84
+%define SYS_CREAT 85
+%define SYS_UNLINK 87
 
 ; File open attributes
 %define O_RDONLY 0
