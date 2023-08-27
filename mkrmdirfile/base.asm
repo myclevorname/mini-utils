@@ -24,7 +24,7 @@ _start:
 	mov rbx, [rsp]	; argc
 	cmp rbx, 1
 	je exit
-	xor rbp, rbp	; preserved version of rcx
+	xor ebp, ebp	; preserved counter
 	xor r12d, r12d
 	mov eax, [rsp + 8*2]
 	and eax, 0x00FFFFFF 	; ignore 4th byte
@@ -33,8 +33,8 @@ _start:
 	dec r12d	; bitmask = 0 if "-f"
 
 	mkdir_loop:
-		inc rbp
-		cmp rbp, rbx
+		inc ebp
+		cmp ebp, ebx
 		jae exit
 
 		mov rdi, [rsp + 8 + 8 * rbp]	; rbp is post-incremented
@@ -59,7 +59,7 @@ error:
 	jmp error_exit
 
 exit:
-	xor rdi, rdi
+	xor edi, edi
 error_exit:
 	xor eax, eax
 	mov al, 60
