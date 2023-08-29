@@ -7,11 +7,12 @@ The only packages you need are: `make`, `nasm`, and `ld`.
 Run `make debug` to generate a debuggable binary.
 I currently suck at Makefiles, so the files in mkrmdirfile will not produce debugable programs.
 
-I don't have a Makefile set up in the root directory of this project, so you will have to run make in each subfolder.
-
 ## Current List
 - cat
-	- compiles to 488 bytes
+	- compiles to 464 bytes
 - mkdir, rmdir, touch, rm
 	- compiles to 424 bytes each
 	- all based on the same piece of code at `mkrmdirfile/base.asm`
+- head
+	- This is not finished yet because I need to add the line-counting.
+	- Don't expect it to compile! It has not been tested yet.
