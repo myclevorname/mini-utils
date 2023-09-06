@@ -5,7 +5,7 @@ I want all of these to be as small as possible, meaning there are very few featu
 ## Build
 The only packages you need are: `make`, `nasm`, and `ld`.
 Run `make debug` to generate a debuggable binary.
-I currently suck at Makefiles, so the files in mkrmdirfile will not produce debugable programs.
+I currently suck at Makefiles, so the files in mkrmdirfile will not produce debuggable programs.
 
 ## Current List
 - cat
