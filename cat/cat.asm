@@ -1,7 +1,5 @@
 %include "../linux_syscalls.inc"
 
-FILE_READ_SIZE equ 1024
-
 global _start
 
 section .text

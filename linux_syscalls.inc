@@ -23,4 +23,10 @@
 %define stdout 1
 %define stderr 2
 
+
+
+; Auxillary defines
+%define NEWLINE 10
+%define FILE_READ_SIZE 1024
+
 %endif
