@@ -9,10 +9,15 @@ I currently suck at Makefiles, so the files in mkrmdirfile will not produce debu
 
 ## Current List
 - cat
-	- compiles to 464 bytes
+	- compiles to 256 bytes
 - mkdir, rmdir, touch, rm
-	- compiles to 424 bytes each
+	- rm and rmdir take up 210 bytes, while touch and mkdir take up 215 bytes
 	- all based on the same piece of code at `mkrmdirfile/base.asm`
 - head
 	- This is not finished yet because I need to add the line-counting.
 	- Don't expect it to compile! It has not been tested yet.
+
+- strip-secthead
+	- Not really a Linux utility; just strips the section header from the other listed programs (and istelf!) to reduce file size
+	- I got a 45-50% reduction in program size, but that will be **much** lower if your programs are bigger
+	- Exercise moderate caution when using this program. I used ld to build the program with GNU ld's built-in linker script. Make sure your program works after using the utility.

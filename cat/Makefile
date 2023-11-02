@@ -1,8 +1,10 @@
 .PHONY: all clean debug
 all: cat # cat-debug
 
-cat: cat.o
+cat: cat.o ../bin/strip_secthead
 	ld -m elf_x86_64 -z noseparate-code -o cat cat.o -s
+	../bin/strip_secthead ./cat
+	cp cat ../bin/
 
 cat.o: cat.asm ../linux_syscalls.inc
 	nasm -o cat.o -f elf64 cat.asm -O3

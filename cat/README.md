@@ -1,5 +1,5 @@
 # cat
-A miniature cat program written in x86_64 assembly for Linux. It currently compiles to just 464 bytes!
+A miniature cat program written in x86_64 assembly for Linux. It currently compiles to just 256 bytes!
 It doesn't use the C standard library, only Linux syscalls.
 
 ## Usage
@@ -10,4 +10,6 @@ If you want to read a file named `-` instead, just use `./-` instead.
 
 ## Build
 All you need to compile is `make`, `ld`, and `nasm`.
-Run `make` to make cat, `make debug` to make cat-debug, and `make clean` to "clean" up the directory.
+
+First, run `make strip_secthead` in the parent directory.
+Then, you can run `make` to make cat, `make debug` to make cat-debug, and `make clean` to "clean" up the directory.

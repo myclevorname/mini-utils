@@ -5,7 +5,10 @@
 %define SYS_READ 0
 %define SYS_WRITE 1
 %define SYS_OPEN 2
+%define SYS_CLOSE 3
+%define SYS_LSEEK 8
 %define SYS_EXIT 60
+%define SYS_FTRUNCATE 77
 %define SYS_MKDIR 83
 %define SYS_RMDIR 84
 %define SYS_CREAT 85
@@ -13,7 +16,12 @@
 
 ; File open attributes
 %define O_RDONLY 0
+%define O_RDWR 2
 
+; lseek whence
+%define SEEK_SET 0
+%define SEEK_CUR 1
+%define SEEK_END 2
 
 ; error from syscalls
 %define ERRNO_MIN -4096
