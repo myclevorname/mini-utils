@@ -61,7 +61,8 @@ remove_section_headers:
 	mov al, SYS_FTRUNCATE
 	mov edi, ebx
 	mov esi, [rbp + 0x60]	; why 0x60? idk, but it works
-	inc esi			; offset 0x60 actually points to the *last* byte
+;	inc esi			; offset 0x60 actually points to the *last* byte
+				; oh wait, it actually doesn't
 	syscall
 exit:
 	xor edi, edi

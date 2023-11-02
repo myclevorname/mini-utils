@@ -9,9 +9,9 @@ I currently suck at Makefiles, so the files in mkrmdirfile will not produce debu
 
 ## Current List
 - cat
-	- compiles to 256 bytes
+	- compiles to 255 bytes
 - mkdir, rmdir, touch, rm
-	- rm and rmdir take up 210 bytes, while touch and mkdir take up 215 bytes
+	- rm and rmdir take up 209 bytes, while touch and mkdir take up 214 bytes
 	- all based on the same piece of code at `mkrmdirfile/base.asm`
 - head
 	- This is not finished yet because I need to add the line-counting.
