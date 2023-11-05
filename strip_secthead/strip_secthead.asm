@@ -1,12 +1,7 @@
+%define WRITE_EXEC
 %include "../linux_syscalls.inc"
-global _start
-section .bss
-%define FILE_BUFFER_SIZE 0x80
-file_buffer:	resb FILE_BUFFER_SIZE	; just enough for e_phnum and e_phoff and other stuff and things
-zero:		resw 1
-
-section .text
-
+%include "../elf-header.inc"
+%define FILE_BUFFER_SIZE 0x70
 _start:
 	pop rax		; argc, might as well put it here because ~~it is available~~ I only need it once
 	pop rbx		; argv[0], not needed, but 16-byte alignment required by the ABI(TM)
@@ -22,14 +17,14 @@ _start:
 
 	mov ebx, eax	; fd
 	mov edi, ebx
-	mov esi, file_buffer
+	lea rbp, [elf_copy]
+	mov rsi, rbp
 	mov edx, FILE_BUFFER_SIZE
 	xor eax, eax
-	mov eax, SYS_READ
+	mov al, SYS_READ
 	syscall
 	cmp eax, ERRNO_MIN
 	jae error_exit	; I don't care enough right now to make it read for more ~~because I am lazy~~ for size purposes
-	mov rbp, file_buffer
 	mov ax, [rbp + 0x38]
 	and ax, ax
 	je exit
@@ -49,10 +44,11 @@ remove_section_headers:
 	jae error_exit
 
 	mov edi, ebx
-	mov rsi, zero
+	lea rsi, [zero]
 	xor edx, edx
 	mov dl, 2
-	mov eax, SYS_WRITE
+	xor eax, eax
+	mov al, SYS_WRITE
 	syscall		; finally say there are 0 section headers
 	cmp eax, ERRNO_MIN
 	jae error_exit
@@ -71,3 +67,8 @@ error_exit:
 	xor eax, eax
 	mov al, SYS_EXIT
 	syscall
+_end:
+elf_copy:
+
+zero equ elf_copy+FILE_BUFFER_SIZE
+_bss_end equ zero+2

@@ -1,17 +1,13 @@
-DIRS := mkrmdirfile cat # head
-DIRS_WITH_SPECIAL := $(DIRS) strip_secthead
+DIRS := mkrmdirfile cat strip_secthead # head
 COMMANDS := all clean
 .PHONY: all clean $(ALL_TARGETS)
 TARGET_GEN = $(foreach DIR,$(DIRS),$(DIR)/$(TARGET))
 ALL_TARGETS := $(foreach TARGET,$(COMMANDS),$(TARGET_GEN))
 
-TARGET_GEN_SPECIAL = $(foreach DIR,$(DIRS_WITH_SPECIAL),$(DIR)/$(TARGET))
-ALL_TARGETS_SPECIAL = $(foreach TARGET,$(COMMANDS),$(TARGET_GEN_SPECIAL))
-
-all: make_dir strip_secthead/all $(foreach TARGET,all,$(TARGET_GEN))
+all: make_dir $(foreach TARGET,all,$(TARGET_GEN))
 make_dir:
 	mkdir -p bin
-clean: $(foreach TARGET,clean,$(TARGET_GEN_SPECIAL))
+clean: $(foreach TARGET,clean,$(TARGET_GEN))
 	rm -rf bin/
-$(ALL_TARGETS_SPECIAL):
+$(ALL_TARGETS): elf-header.inc linux_syscalls.inc
 	$(MAKE) -C $(@D) $(@F)

@@ -1,8 +1,7 @@
 
 %include "../linux_syscalls.inc"
-global _start
+%include "../elf-header.inc"
 
-section .text
 ; defines:
 ; touch, rm, rmdir, mkdir
 
@@ -49,18 +48,14 @@ _start:
 
 		and eax, r12d
 		cmp eax, ERRNO_MIN
-		jae error
+		jae error_exit
 
 		jmp mkdir_loop
-
-error:
-	movsx rdi, eax
-	neg rdi
-	jmp error_exit
-
 exit:
 	xor edi, edi
 error_exit:
+	neg edi
 	xor eax, eax
 	mov al, 60
 	syscall
+_end:

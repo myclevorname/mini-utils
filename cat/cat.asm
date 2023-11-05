@@ -1,8 +1,6 @@
 %include "../linux_syscalls.inc"
+%include "../elf-header.inc"
 
-global _start
-
-section .text
 	; char *argv[] = rbp = r13
 _start:
 	lea r13, [rsp + 8]
@@ -49,10 +47,12 @@ _start:
 			cmp eax, ERRNO_MIN
 			jae error
 			jmp read_file
-	end_loop:
-		xor edi, edi
-	error:
-		neg edi	; if no error, edi=0
-	error_exit:
-		mov eax, SYS_EXIT
-		syscall
+end_loop:
+	xor edi, edi
+error:
+	neg edi	; if no error, edi=0
+error_exit:
+	xor eax, eax
+	mov al, SYS_EXIT
+	syscall
+_end:

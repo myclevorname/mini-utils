@@ -3,10 +3,9 @@ OUTPUT := rm rmdir mkdir touch
 
 all: $(OUTPUT)
 
-$(OUTPUT): base.asm ../linux_syscalls.inc
-	nasm -o $@.o -f elf64 base.asm -O3 -d$@
-	ld -m elf_x86_64 -z noseparate-code -o $@ $@.o -s
-	../bin/strip_secthead ./$@
+$(OUTPUT): base.asm ../linux_syscalls.inc ../elf-header.inc
+	nasm -o $@ -f bin base.asm -O3 -d$@
+	chmod a+x $@
 	cp $@ ../bin/
 
 clean:
