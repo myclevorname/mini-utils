@@ -61,8 +61,9 @@ remove_section_headers:
 				; oh wait, it actually doesn't
 	syscall
 exit:
-	xor edi, edi
+	xor eax, eax
 error_exit:
+	mov edi, eax
 	neg edi
 	xor eax, eax
 	mov al, SYS_EXIT

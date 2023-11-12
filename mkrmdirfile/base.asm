@@ -52,8 +52,9 @@ _start:
 
 		jmp mkdir_loop
 exit:
-	xor edi, edi
+	xor eax, eax
 error_exit:
+	mov edi, eax
 	neg edi
 	xor eax, eax
 	mov al, 60
