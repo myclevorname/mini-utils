@@ -7,7 +7,7 @@
 _start:
 	pop rbx		; argc, only needed once
 	mov rbp, rsp	; pointer to current arg, and it is pre-incremented
-	mov dword [rsp], ERRNO_MIN	; try to avoid using r8-r15 while not using an immediate ERRNO_MIN
+	mov sp, ERRNO_MIN	; try to avoid using r8-r15 while not using an immediate ERRNO_MIN
 	dec ebx
 	jz read_file
 open_file:
@@ -24,7 +24,7 @@ open_file:
 	xor esi, esi	; O_RDONLY = 0
 	syscall
 
-	cmp eax, [rsp]
+	cmp ax, sp
 	jae error_exit
 	
 	mov ebx, eax
@@ -36,7 +36,7 @@ read_file:
 	xor eax, eax	; SYS_READ = 0
 	syscall
 
-	cmp eax, [rsp]
+	cmp ax, sp
 	jae error_exit
 
 	and eax, eax
@@ -49,7 +49,7 @@ write_stdout:
 	mov eax, edi	; SYS_WRITE = 1
 	syscall
 
-	cmp eax, [rsp]
+	cmp ax, sp
 	jae error_exit
 
 	jmp read_file
