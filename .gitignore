@@ -5,3 +5,5 @@ mkrmdirfile/mkdir
 mkrmdirfile/rmdir
 mkrmdirfile/rm
 mkrmdirfile/touch
+bin/
+strip_secthead/strip_secthead
