@@ -7,9 +7,9 @@ The only packages you need are `make` and `nasm`.
 
 ## Current List
 - cat
-	- compiles to 228 bytes
+	- takes up 216 bytes
 - mkdir, rmdir, touch, rm
-	- rm and rmdir take up 197 bytes, while touch and mkdir take up 202 bytes
+	- rm and rmdir take up 185 bytes, while touch and mkdir take up 190 bytes
 	- all based on the same piece of code at `mkrmdirfile/base.asm`
 - head
 	- This is not finished yet because I need to add the line-counting.
@@ -17,6 +17,7 @@ The only packages you need are `make` and `nasm`.
 
 - strip-secthead
 	- Not really a Linux utility; just strips the section header ~~from the other listed programs~~ from your assembly programs to reduce file size
+	- Takes up 240 bytes
 	- I got a 45-50% reduction in program size, but that will be **much** lower if your assembly programs are bigger
 	- Exercise moderate caution when using this program. ~~I used ld to build the program with GNU ld's built-in linker script.~~ I transitioned to each program using a pre-made ELF header, but I have tested this before. Make sure your program works after using the utility.
 

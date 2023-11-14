@@ -9,15 +9,15 @@ _start:
 	mov rbp, rsp	; pointer to current arg, and it is pre-incremented
 	mov sp, ERRNO_MIN	; try to avoid using r8-r15 while not using an immediate ERRNO_MIN
 	dec ebx
-	jz read_file
+	jz short read_file
 open_file:
 	add rbp, byte 8
 	mov rdi, [rbp]
-	or rdi, rdi
-	jz exit
+	and rdi, rdi
+	jz short __exit
 	xor ebx, ebx	; fd
 	cmp word [rdi], "-"
-	je read_file
+	je short read_file
 
 	xor eax, eax
 	mov al, SYS_OPEN
@@ -25,7 +25,7 @@ open_file:
 	syscall
 
 	cmp ax, sp
-	jae error_exit
+	jae short __error_exit
 	
 	mov ebx, eax
 read_file:
@@ -37,10 +37,10 @@ read_file:
 	syscall
 
 	cmp ax, sp
-	jae error_exit
+	jae short __error_exit
 
 	and eax, eax
-	jz open_file
+	jz short open_file
 write_stdout:
 	mov edx, eax
 	mov esi, file_buffer
@@ -50,17 +50,9 @@ write_stdout:
 	syscall
 
 	cmp ax, sp
-	jae error_exit
+	jae short __error_exit
 
-	jmp read_file
-exit:
-	xor eax, eax
-error_exit:
-	mov edi, eax
-	neg edi		; if no error, edi=0
-	xor eax, eax
-	mov al, 60
-	syscall
+	jmp short read_file
 _end:
 file_buffer:
 _bss_end equ file_buffer + FILE_READ_SIZE

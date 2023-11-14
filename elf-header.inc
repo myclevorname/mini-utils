@@ -7,8 +7,13 @@ db 2			; 64-bit
 db 1			; little endian
 db 1			; ELF v1
 db 3			; Linux ABI
-db 0			; OS ABI
-times 7 db 0		; padding
+
+__exit_jmp:
+	xor eax, eax	; 2? OS ABI
+__error_exit_jmp:	; padding
+	mov edi, eax	; 2?
+	xor eax, eax	; 2?
+	jmp short __exit_p2	; 2?
 
 ;---------ELF HEADER PART 2------
 dw 2			; executable file
@@ -35,11 +40,19 @@ prog_header:
 %endif
 	dq _start-$$	; offset in file
 	dq _start	; location in memory
-	dq 0		; Physical address, irrelevant
+__exit_p2:		; Physical address, irrelevant
+	mov al, 60	; 2?
+	syscall		; 2?
+
+	dd 0
 	dq _end-_start	; Size in file
 %ifdef _bss_end
 	dq _bss_end-_start		; Size in memory
 %else
 	dq _end-_start
 %endif
-	dq 0x1000	; Alignment
+	dd 0	; Alignment, not needed
+__exit:
+	jmp short __exit_jmp
+__error_exit:
+	jmp short __error_exit_jmp

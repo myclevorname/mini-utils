@@ -22,7 +22,7 @@
 _start:
 	mov rbx, [rsp]	; argc
 	cmp rbx, 1
-	je exit
+	je __exit
 	xor ebp, ebp	; preserved counter
 	xor r12d, r12d
 	mov eax, [rsp + 8*2]
@@ -34,7 +34,7 @@ _start:
 	mkdir_loop:
 		inc ebp
 		cmp ebp, ebx
-		jae exit
+		jae __exit
 
 		mov rdi, [rsp + 8 + 8 * rbp]	; rbp is post-incremented
 		%ifdef touch
@@ -48,15 +48,7 @@ _start:
 
 		and eax, r12d
 		cmp eax, ERRNO_MIN
-		jae error_exit
+		jae short __error_exit
 
-		jmp mkdir_loop
-exit:
-	xor eax, eax
-error_exit:
-	mov edi, eax
-	neg edi
-	xor eax, eax
-	mov al, 60
-	syscall
+		jmp short mkdir_loop
 _end:
