@@ -5,9 +5,8 @@
 %define FILE_READ_SIZE 4096
 
 _start:
-	pop rbx		; argc, only needed once
-	mov rbp, rsp	; pointer to current arg, and it is pre-incremented
-	mov sp, ERRNO_MIN	; try to avoid using r8-r15 while not using an immediate ERRNO_MIN
+	mov rbx, [rsp]		; argc, only needed once
+	lea rbp, [rsp+8]	; pointer to current arg, and it is pre-incremented
 	dec ebx
 	jz short read_file
 open_file:
@@ -24,7 +23,7 @@ open_file:
 	xor esi, esi	; O_RDONLY = 0
 	syscall
 
-	cmp ax, sp
+	cmp ah, -16		; -4096 >> 8
 	jae short __error_exit
 	
 	mov ebx, eax
@@ -36,11 +35,20 @@ read_file:
 	xor eax, eax	; SYS_READ = 0
 	syscall
 
-	cmp ax, sp
+	cmp ah, -16
 	jae short __error_exit
 
 	and eax, eax
-	jz short open_file
+	jnz short read_file
+close_file:
+	cmp ebx, byte 2
+	jbe open_file
+	mov edi, ebx
+	xor eax, eax
+	mov al, 3
+	syscall
+	jmp short open_file
+
 write_stdout:
 	mov edx, eax
 	mov esi, file_buffer
@@ -49,7 +57,7 @@ write_stdout:
 	mov eax, edi	; SYS_WRITE = 1
 	syscall
 
-	cmp ax, sp
+	cmp ah, -16
 	jae short __error_exit
 
 	jmp short read_file
