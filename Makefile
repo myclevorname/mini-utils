@@ -1,4 +1,4 @@
-DIRS := mkrmdirfile cat strip_secthead # head
+DIRS := mkrmdirfile cat
 COMMANDS := all clean
 .PHONY: all clean $(ALL_TARGETS)
 TARGET_GEN = $(foreach DIR,$(DIRS),$(DIR)/$(TARGET))
