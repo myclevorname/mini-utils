@@ -14,8 +14,8 @@ The only packages you need are `make` and `nasm`.
 
 # Contact
 If you need support, or just want to say something, you can contact me in these ways, sorted from most likely to respond to least likely to respond:
-	1. Discord: imclevor
+1. Discord: imclevor
 
-	2. Email: my Github username but I use Google's service
+2. Email: my Github username but I use Google's service
 
-	3. IRC: clevor@EFnet assuming my IRC client doesn't shut down AND I read it AND someone doesn't impersonate me
+3. IRC: clevor@EFnet assuming my IRC client doesn't shut down AND I read it AND someone doesn't impersonate me
