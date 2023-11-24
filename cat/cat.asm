@@ -39,7 +39,7 @@ read_file:
 	jae short __error_exit
 
 	and eax, eax
-	jnz short read_file
+	jnz short write_stdout
 close_file:
 	cmp ebx, byte 2
 	jbe open_file
