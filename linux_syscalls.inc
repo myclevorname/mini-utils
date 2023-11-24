@@ -7,6 +7,7 @@
 %define SYS_OPEN 2
 %define SYS_CLOSE 3
 %define SYS_LSEEK 8
+%define SYS_BRK 12
 %define SYS_EXIT 60
 %define SYS_FTRUNCATE 77
 %define SYS_MKDIR 83

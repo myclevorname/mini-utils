@@ -5,8 +5,9 @@
 %define FILE_READ_SIZE 4096
 
 _start:
-	mov rbx, [rsp]		; argc, only needed once
-	lea rbp, [rsp+8]	; pointer to current arg, and it is pre-incremented
+	pop rbx			; argc, only needed once
+	mov rbp, rsp		; pointer to current arg, and it is pre-incremented
+	push rbx		; Keep that 16-byte alignment
 	dec ebx
 	jz short read_file
 open_file:
@@ -23,8 +24,9 @@ open_file:
 	xor esi, esi	; O_RDONLY = 0
 	syscall
 
-	cmp ah, -16		; -4096 >> 8
-	jae short __error_exit
+;	cmp ah, -16
+;	jae __error_exit
+	call __check_error
 	
 	mov ebx, eax
 read_file:
@@ -35,8 +37,9 @@ read_file:
 	xor eax, eax	; SYS_READ = 0
 	syscall
 
-	cmp ah, -16
-	jae short __error_exit
+;	cmp ah, -16
+;	jae __error_exit
+	call __check_error
 
 	and eax, eax
 	jnz short write_stdout
@@ -57,8 +60,9 @@ write_stdout:
 	mov eax, edi	; SYS_WRITE = 1
 	syscall
 
-	cmp ah, -16
-	jae short __error_exit
+;	cmp ah, -16
+;	jae __error_exit
+	call __check_error
 
 	jmp short read_file
 _end:

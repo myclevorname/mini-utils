@@ -23,8 +23,6 @@ _start:
 	mov rbx, [rsp]	; argc
 	cmp rbx, 1
 	je __exit
-	xor ebp, ebp	; preserved counter
-	xor r12d, r12d
 	mov eax, [rsp + 8*2]
 	and eax, 0x00FFFFFF 	; ignore 4th byte
 	cmp eax, "-f"
@@ -47,8 +45,7 @@ _start:
 		syscall
 
 		and eax, r12d
-		cmp eax, ERRNO_MIN
-		jae short __error_exit
+		call __check_error
 
 		jmp short mkdir_loop
 _end:
