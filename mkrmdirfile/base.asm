@@ -20,21 +20,23 @@
 
 
 _start:
-	mov rbx, [rsp]	; argc
-	cmp rbx, 1
-	je __exit
-	mov eax, [rsp + 8*2]
+	pop rcx			; argc
+	pop rax			; keep 16-byte alignment
+	mov rbp, rsp
+
+	dec ecx
+	jz __exit
+
 	and eax, 0x00FFFFFF 	; ignore 4th byte
 	cmp eax, "-f"
-	sete r12b
-	dec r12d	; bitmask = 0 if "-f"
+	sete bl
+	dec ebx			; bitmask = 0 if "-f"
 
 	mkdir_loop:
-		inc ebp
-		cmp ebp, ebx
-		jae __exit
+		cmp qword rbp, 0
+		jz __exit
 
-		mov rdi, [rsp + 8 + 8 * rbp]	; rbp is post-incremented
+		mov rdi, [rbp]	; rbp is post-incremented
 		%ifdef touch
 		mov esi, 0q0666
 		%elifdef mkdir
@@ -44,8 +46,8 @@ _start:
 		mov al, SYS_WANTED
 		syscall
 
-		and eax, r12d
-		call __check_error
+		and eax, ebx
+		jnz __check_error
 
 		jmp short mkdir_loop
 _end:

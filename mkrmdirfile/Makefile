@@ -9,4 +9,4 @@ $(OUTPUT): base.asm ../linux_syscalls.inc ../elf-header.inc
 	cp $@ ../bin/
 
 clean:
-	rm -f $(OUTPUT) *.o
+	rm -f $(OUTPUT) *.o *-old

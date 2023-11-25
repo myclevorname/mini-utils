@@ -9,7 +9,7 @@ The only packages you need are `make` and `nasm`.
 - cat
 	- takes up 222 bytes
 - mkdir, rmdir, touch, rm
-	- rm and rmdir take up 172 bytes, while touch and mkdir take up 177 bytes
+	- rm and rmdir take up 160 bytes, while touch and mkdir take up 165 bytes
 	- all based on the same piece of code at `mkrmdirfile/base.asm`
 
 # Contact
