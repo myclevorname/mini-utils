@@ -22,8 +22,8 @@ open_file:
 	xor eax, eax
 	mov al, SYS_OPEN
 	xor esi, esi	; O_RDONLY = 0
-	syscall
 
+;	syscall
 ;	cmp ah, -16
 ;	jae __error_exit
 	call __check_error
@@ -35,8 +35,8 @@ read_file:
 	lea esi, [file_buffer]
 	mov edi, ebx
 	xor eax, eax	; SYS_READ = 0
-	syscall
 
+;	syscall
 ;	cmp ah, -16
 ;	jae __error_exit
 	call __check_error
@@ -58,8 +58,8 @@ write_stdout:
 	xor edi, edi
 	inc edi		; stdout = 1
 	mov eax, edi	; SYS_WRITE = 1
-	syscall
 
+;	syscall
 ;	cmp ah, -16
 ;	jae __error_exit
 	call __check_error

@@ -27,13 +27,9 @@ _start:
 	dec ecx
 	jz __exit
 
-	and eax, 0x00FFFFFF 	; ignore 4th byte
-	cmp eax, "-f"
-	sete bl
-	dec ebx			; bitmask = 0 if "-f"
-
 	mkdir_loop:
-		cmp qword rbp, 0
+		add rbp, byte 8
+		cmp qword [rbp], 0
 		jz __exit
 
 		mov rdi, [rbp]	; rbp is post-incremented
@@ -44,10 +40,8 @@ _start:
 		%endif
 		xor eax, eax
 		mov al, SYS_WANTED
-		syscall
 
-		and eax, ebx
-		jnz __check_error
+		call __check_error
 
 		jmp short mkdir_loop
 _end:

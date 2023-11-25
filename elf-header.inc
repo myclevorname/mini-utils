@@ -24,15 +24,18 @@ dq prog_header-$$	; Program header table offset
 __exit_p3:		; Section header table offset
 	mov al, 60
 	neg edi
+__check_error:
 	syscall
-__check_error_jmp:
-	cmp ah, -16
-	jae __error_exit_jmp	; AMD64 flags
+__check_error_after:	; Call this if you process something after the syscall, or jump to __error_exit_jmp
+	cmp ah, -16	; AMD64 flags
+	jae __error_exit_jmp
 	ret
-dw 64			; ELF header size
+__error_exit:		; ELF header size, not needed
+	jmp short __error_exit_jmp
 dw 0x38			; Program header entry size
 dw 1			; 1 program header
-dw 0			; Size of section header
+__exit:		; Size of section header
+	jmp short __exit_jmp
 dw 0			; Number of section headers
 
 ;-------PROGRAM HEADER---------
@@ -52,11 +55,8 @@ __exit_p2:		; Physical address, irrelevant
 	db 0
 	dq _end-$$	; Size in file
 %ifdef _bss_end
-	dq _bss_end-$$		; Size in memory
+	dq _bss_end-$$	; Size in memory
 %else
 	dq _end-$$
 %endif
-__check_error:
-	jmp short __check_error_jmp	; 2 Alignment, not needed
-__exit:
-	jmp short __exit_jmp
+; dw 0x10000		; Alignment, not needed
