@@ -6,6 +6,7 @@ mkrmdirfile/rmdir
 mkrmdirfile/rm
 mkrmdirfile/touch
 bin/
+yes/yes
 
 # Projects that are not started and/or incomplete
 tac/
