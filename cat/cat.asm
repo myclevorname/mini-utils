@@ -32,7 +32,7 @@ open_file:
 read_file:
 	xor edx, edx
 	mov dh, FILE_READ_SIZE >> 8
-	lea esi, [file_buffer]
+	mov esi, file_buffer
 	mov edi, ebx
 	xor eax, eax	; SYS_READ = 0
 
@@ -48,7 +48,7 @@ close_file:
 	jbe open_file
 	mov edi, ebx
 	xor eax, eax
-	mov al, 3
+	mov al, SYS_CLOSE
 	syscall
 	jmp short open_file
 

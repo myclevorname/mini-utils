@@ -7,10 +7,13 @@ The only packages you need are `make` and `nasm`.
 
 ## Current List
 - cat
-	- takes up 212 bytes
+	- takes up 210 bytes
 - mkdir, rmdir, touch, rm
 	- rm and rmdir take up 145 bytes, while touch and mkdir take up 150 bytes
 	- all based on the same piece of code at `mkrmdirfile/base.asm`
+- yes
+	- takes up 177 bytes
+	- The string printed is comprised of the first argument, so you should put everything you want to print in quotes
 
 # Contact
 If you need support, or just want to say something, you can contact me in these ways, sorted from most likely to respond to least likely to respond:

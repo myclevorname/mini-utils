@@ -18,7 +18,11 @@ __error_exit_jmp:	; padding
 ;---------ELF HEADER PART 2------
 dw 2			; executable file
 dw 0x3E			; AMD64
-dd 1			; ELF v1
+yes:			; ELF v1, not needed
+	db "y"
+newline:
+	db 10
+dw 0
 dq _start		; entry point
 dq prog_header-$$	; Program header table offset
 __exit_p3:		; Section header table offset
