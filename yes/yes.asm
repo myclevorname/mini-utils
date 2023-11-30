@@ -4,39 +4,35 @@
 
 _start:
 	pop rdx			; argc, only needed once
-	mov ebp, newline	; use for part 2
-	pop rbx			; Keep that 16-byte alignment
+	pop rdi			; Keep that 16-byte alignment
 
-	mov ebx, yes
+	mov ebp, yes
 
-	inc r12d		; strlen(yes)
-	inc r13d		; strlen(newline)
+	mov bl, 2		; strlen(yes)
 	cmp edx, byte 2
 	jb short print
 strlen:
 	cld
-	mov rbx, [rsp]
-	mov rdi, rbx
+	mov rbp, [rsp]
+	mov rdi, rbp
 ;	xor eax, eax
 ;	xor ecx, ecx
 	dec ecx
-	repne scasb		; ecx = -(strlen+1)-1=-strlen-2
-				; strlen = -(ecx+1)-1=-ecx-2
+	repne scasb		; ecx = -(strlen)-1=-strlen-1
+				; strlen = -(ecx+1)=-ecx-1
 				; not ecx = -1 - ecx
 ;	neg ecx
 ;	dec ecx
 	not ecx
-	dec ecx
-	mov r12d, ecx
+	mov byte [rdi-1], 10
+	mov ebx, ecx
 
 print:
 	xor eax, eax		; SYS_WRITE = 1
 	inc eax
 	mov edi, eax		; stdout=1
-	mov rsi, rbx
-	mov edx, r12d
+	mov rsi, rbp
+	mov edx, ebx
 	call __check_error
-	xchg rbx, rbp
-	xchg r12d, r13d
 	jmp short print
 _end:

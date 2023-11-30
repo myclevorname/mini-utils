@@ -12,7 +12,7 @@ The only packages you need are `make` and `nasm`.
 	- rm and rmdir take up 145 bytes, while touch and mkdir take up 150 bytes
 	- all based on the same piece of code at `mkrmdirfile/base.asm`
 - yes
-	- takes up 177 bytes
+	- takes up 162 bytes
 	- The string printed is comprised of the first argument, so you should put everything you want to print in quotes
 
 # Contact
