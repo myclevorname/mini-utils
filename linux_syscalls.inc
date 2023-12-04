@@ -7,6 +7,7 @@
 %define SYS_OPEN 2
 %define SYS_CLOSE 3
 %define SYS_LSEEK 8
+%define SYS_MMAP 9
 %define SYS_BRK 12
 %define SYS_EXIT 60
 %define SYS_FTRUNCATE 77
@@ -32,7 +33,12 @@
 %define stdout 1
 %define stderr 2
 
+; mmap flags
+%define MAP_PRIVATE 2
+%define MAP_32BIT 0x40
 
+%define PROT_NONE 0
+%define PROT_READ 1
 
 ; Auxillary defines
 %define NEWLINE 10
