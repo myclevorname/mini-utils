@@ -6,8 +6,8 @@ all: $(OUTPUT)
 
 $(OUTPUT): $(SOURCE) ../base.inc ../elf-header.inc ../linux_syscalls.inc
 	nasm -o $@ $(SOURCE) -d$@ -f bin
-	cp $@ ../bin/
 	chmod a+x $@
+	cp $@ ../bin/
 
 # $(DEBUG_OUTPUT): $(SOURCE) ../base.inc ../elf-header.inc ../linux_syscalls.inc
 #	nasm -o $(@D).o $(SOURCE) -d $(@D) -f elf64 -g -d DEBUG
