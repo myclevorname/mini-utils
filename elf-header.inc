@@ -18,7 +18,7 @@ __error_exit_jmp:	; padding
 ;---------ELF HEADER PART 2------
 dw 2			; executable file
 dw 0x3E			; AMD64
-yes:			; ELF v1, not needed
+yes_letter:		; ELF v1, not needed
 	db "y"
 newline:
 	db 10

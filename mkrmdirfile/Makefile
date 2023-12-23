@@ -1,12 +1,6 @@
-.PHONY: all clean debug
-OUTPUT := rm rmdir mkdir touch
+# These lines should be edited
+SOURCE := base.asm
+OUTPUT := mkdir rmdir rm touch
+DIRECTORY := mkrmdirfile
 
-all: $(OUTPUT)
-
-$(OUTPUT): base.asm ../linux_syscalls.inc ../elf-header.inc
-	nasm -o $@ -f bin base.asm -O3 -d$@
-	chmod a+x $@
-	cp $@ ../bin/
-
-clean:
-	rm -f $(OUTPUT) *.o *-old
+include ../Makefile.program

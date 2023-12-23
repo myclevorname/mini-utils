@@ -6,7 +6,7 @@ _start:
 	pop rdx			; argc, only needed once
 	pop rdi			; Keep that 16-byte alignment
 
-	mov ebp, yes
+	mov ebp, yes_letter
 
 	mov bl, 2		; strlen(yes)
 	cmp edx, byte 2

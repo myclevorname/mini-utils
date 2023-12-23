@@ -28,7 +28,6 @@ _start:
 	jz __exit
 
 	mkdir_loop:
-		add rbp, byte 8
 		cmp qword [rbp], 0
 		jz __exit
 
@@ -42,6 +41,6 @@ _start:
 		mov al, SYS_WANTED
 
 		call __check_error
-
+		add rbp, byte 8
 		jmp short mkdir_loop
 _end:
