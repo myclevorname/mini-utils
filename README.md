@@ -1,5 +1,5 @@
 # mini-utils
-This is a set of small commands I am making to learn x86_64 assembly for Linux.
+This is a set of small commands I am making to learn x86\_64 assembly for Linux.
 I want all of these to be as small as possible, meaning there are very few features, unlike GNU Coreutils, for example.
 
 ## Build
@@ -15,7 +15,12 @@ The only packages you need are `make` and `nasm`.
 	- takes up 162 bytes
 	- The string printed is comprised of the first argument, so you should put everything you want to print in quotes
 
-# Contact
+## Disclaimer
+The W^X protection of some processors and/or operating systems may cause some programs, like cat, to not run at all.
+I will not attempt to accomodate for this because my it works on my machine.
+I will not accept pull requests to appease those computers unless the programs are smaller afterward.
+
+## Contact
 If you need support, or just want to say something, you can contact me in these ways, sorted from most likely to respond to least likely to respond:
 1. Discord: imclevor
 
