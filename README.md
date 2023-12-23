@@ -14,6 +14,9 @@ The only packages you need are `make` and `nasm`.
 - yes
 	- takes up 162 bytes
 	- The string printed is comprised of the first argument, so you should put everything you want to print in quotes
+- clear
+	- takes up 137 bytes
+	- Has 3 less options than the ncurses version, but I don't think anyone should need them.
 
 ## Disclaimer
 The W^X protection of some processors and/or operating systems may cause some programs, like cat, to not run at all.
