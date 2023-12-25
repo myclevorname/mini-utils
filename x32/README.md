@@ -5,26 +5,28 @@ I want all of these to be as small as possible, meaning there are very few featu
 ## Build
 The only packages you need are `make` and `nasm`.
 
-There is an experimental x32 port of the binaries in the `x32/` directory.
-You will probably need some kernel flags set to get it to run without errors.
-
 ## Current List
 - cat
-	- takes up 210 bytes
+	- takes up 189 bytes
 - mkdir, rmdir, touch, rm
-	- rm and rmdir take up 145 bytes, while touch and mkdir take up 150 bytes
+	- rm and rmdir take up 121 bytes, while touch and mkdir take up 126 bytes
 	- all based on the same piece of code at `mkrmdirfile/base.asm`
 - yes
-	- takes up 162 bytes
+	- takes up 144 bytes
 	- The string printed is comprised of the first argument, so you should put everything you want to print in quotes
 - clear
-	- takes up 137 bytes
+	- takes up 117 bytes
 	- Has 3 less options than the ncurses version, but I don't think anyone should need them.
 
 ## Disclaimer
 The W^X protection of some processors and/or operating systems may cause some programs, like cat, to not run at all.
 I will not attempt to accomodate for this because my it works on my machine.
 I will not accept pull requests to appease those computers unless the programs are smaller afterward.
+
+Also, the programs are using the X32 ABI.
+I had to make changes to my GRUB configuration [listed here](https://wiki.debian.org/X32Port).
+Without doing that, you may or may not get an `Exec format error`,
+so make sure you have those changes applied before you ask for help.
 
 ## Contact
 If you need support, or just want to say something, you can contact me in these ways, sorted from most likely to respond to least likely to respond:

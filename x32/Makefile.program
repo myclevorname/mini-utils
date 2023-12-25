@@ -1,0 +1,17 @@
+# DEBUG_OBJECT_FILES := $(foreach TARGET,OUTPUT, $(TARGET).o)
+# DEBUG_OUTPUT := $(foreach TARGET,OUTPUT, $(TARGET)/debug)
+all: $(OUTPUT)
+
+# debug: $(foreach TARGET,OUTPUT,$(TARGET)/debug)
+
+$(OUTPUT): $(SOURCE) ../elf-header.inc ../linux_syscalls.inc
+	nasm -o $@ $(SOURCE) -d$@ -f bin
+	chmod a+x $@
+	cp $@ ../bin/
+
+# $(DEBUG_OUTPUT): $(SOURCE) ../base.inc ../elf-header.inc ../linux_syscalls.inc
+#	nasm -o $(@D).o $(SOURCE) -d $(@D) -f elf64 -g -d DEBUG
+#	ld -o $(@D) $(@D).o -g
+
+clean:
+	rm -f $(foreach TARGET,$(OUTPUT),../bin/$(TARGET)) $(OUTPUT)

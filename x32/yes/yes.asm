@@ -3,7 +3,7 @@
 
 _start:
 	pop rdx			; argc, only needed once
-	pop rdi			; Keep that 16-byte alignment
+	push rdx		; Keep that 16-byte alignment
 
 	mov ebp, yes_letter
 
@@ -12,8 +12,8 @@ _start:
 	jb short print
 strlen:
 	cld
-	mov rbp, [rsp]
-	mov rdi, rbp
+	mov ebp, [esp]
+	mov edi, ebp
 ;	xor eax, eax
 ;	xor ecx, ecx
 	dec ecx
@@ -23,15 +23,17 @@ strlen:
 ;	neg ecx
 ;	dec ecx
 	not ecx
-	mov byte [rdi-1], 10
+	mov byte [edi-1], 10
 	mov ebx, ecx
 
 print:
 	xor eax, eax		; SYS_WRITE = 1
 	inc eax
 	mov edi, eax		; stdout=1
-	mov rsi, rbp
+	mov esi, ebp
 	mov edx, ebx
 	call __check_error
 	jmp short print
+yes_letter:
+	db "y", 10
 _end:
