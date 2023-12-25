@@ -4,7 +4,7 @@ all: $(OUTPUT)
 
 # debug: $(foreach TARGET,OUTPUT,$(TARGET)/debug)
 
-$(OUTPUT): $(SOURCE) ../base.inc ../elf-header.inc ../linux_syscalls.inc
+$(OUTPUT): $(SOURCE) ../elf-header.inc ../linux_syscalls.inc
 	nasm -o $@ $(SOURCE) -d$@ -f bin
 	chmod a+x $@
 	cp $@ ../bin/
