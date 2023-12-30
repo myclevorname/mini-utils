@@ -8,8 +8,14 @@ db 1		; x32 = 32-bit
 db 1		; Little endian
 db 1		; ELF v1
 db 3		; Linux
-db 0		; Stable ABI, not needed
-times 7 db 0	; Padding
+
+__check_error:
+	syscall	; Stable ABI, not needed
+		; Padding
+__check_error_after:
+	cmp ah, -16
+	jae __error_exit
+	ret
 
 dw 2		; Executable
 dw 0x3E		; x86_64/AMD64
@@ -50,9 +56,4 @@ __error_exit:
 	mov al, 60
 	neg edi
 	btr esp, 3	; 16-byte alignment when calling from __check_error
-__check_error:
 	syscall
-__check_error_after:
-	cmp ah, -16
-	jae __error_exit
-	ret
