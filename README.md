@@ -20,6 +20,9 @@ You will probably need some kernel flags set to get it to run without errors.
 - clear
 	- takes up 137 bytes
 	- Has 3 less options than the ncurses version, but I don't think anyone should need them.
+- true
+	- takes up 118 bytes
+	- Cannot be reduced even further without a change to the ELF header, or to the kernel
 
 ## Disclaimer
 The W^X protection of some processors and/or operating systems may cause some programs, like cat, to not run at all.

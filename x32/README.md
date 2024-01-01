@@ -17,6 +17,9 @@ The only packages you need are `make` and `nasm`.
 - clear
 	- takes up 111 bytes
 	- Has 3 less options than the ncurses version, but I don't think anyone should need them.
+- true
+	- Takes up 85 bytes
+	- All it does is jump to the exit routine, which conveniently returns zero.
 
 ## Disclaimer
 The W^X protection of some processors and/or operating systems may cause some programs, like cat, to not run at all.

@@ -6,8 +6,11 @@ mkrmdirfile/rmdir
 mkrmdirfile/rm
 mkrmdirfile/touch
 bin/
+x32/bin/
 yes/yes
 clear/clear
+true/true
+# Just run make clean please
 
 # Projects that are not started and/or incomplete
 tac/
