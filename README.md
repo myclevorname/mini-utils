@@ -23,6 +23,9 @@ You will probably need some kernel flags set to get it to run without errors.
 - true
 	- takes up 118 bytes
 	- Cannot be reduced even further without a change to the ELF header, or to the kernel
+- false
+	- takes up 118 bytes
+	- Same problem as true
 
 ## Disclaimer
 The W^X protection of some processors and/or operating systems may cause some programs, like cat, to not run at all.

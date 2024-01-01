@@ -1,4 +1,4 @@
-DIRS := mkrmdirfile cat yes clear true
+DIRS := mkrmdirfile cat yes clear true false
 COMMANDS := all clean
 .PHONY: all clean $(ALL_TARGETS)
 TARGET_GEN = $(foreach DIR,$(DIRS),$(DIR)/$(TARGET))

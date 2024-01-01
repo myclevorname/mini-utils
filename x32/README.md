@@ -20,6 +20,9 @@ The only packages you need are `make` and `nasm`.
 - true
 	- Takes up 85 bytes
 	- All it does is jump to the exit routine, which conveniently returns zero.
+- false
+	- Takes up 89 bytes
+	- Returns 1 instead of 0, unlike true
 
 ## Disclaimer
 The W^X protection of some processors and/or operating systems may cause some programs, like cat, to not run at all.
