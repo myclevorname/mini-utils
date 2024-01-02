@@ -21,7 +21,7 @@ The only packages you need are `make` and `nasm`.
 	- Takes up 85 bytes
 	- All it does is jump to the exit routine, which conveniently returns zero.
 - false
-	- Takes up 89 bytes
+	- Takes up 85 bytes
 	- Returns 1 instead of 0, unlike true
 
 ## Disclaimer

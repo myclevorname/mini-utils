@@ -5,9 +5,10 @@ file_start:
 db 0x7F, "ELF"		; magic
 db 2			; 64-bit
 db 1			; little endian
-db 1			; ELF v1
-db 3			; Linux ABI
-
+yes_letter:		; ELF v1
+	db "y"
+newline:		; Linux ABI
+	db 10
 __exit_jmp:
 	xor eax, eax	; 2? OS ABI
 __error_exit_jmp:	; padding
@@ -18,11 +19,9 @@ __error_exit_jmp:	; padding
 ;---------ELF HEADER PART 2------
 dw 2			; executable file
 dw 0x3E			; AMD64
-yes_letter:		; ELF v1, not needed
-	db "y"
-newline:
-	db 10
-dw 0
+__error_exit_generic:	; ELF v1, not needed
+	mov al, -1
+	jmp short __error_exit
 dq _start		; entry point
 dq prog_header-$$	; Program header table offset
 __exit_p3:		; Section header table offset

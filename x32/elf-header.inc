@@ -35,7 +35,11 @@ prog_start:
 dd 1		; Loadable
 dd 0		; Offset in file
 dd $$		; Offset in memory
-dd 0		; Physical address
+;dd 0		; Physical address
+__error_exit_generic:
+	mov al, -1
+	jmp short __error_exit
+
 dd _end-$$	; Size in file
 
 %ifndef WRITE_EXEC

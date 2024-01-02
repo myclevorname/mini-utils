@@ -22,6 +22,8 @@ The system calls and other defines are located in `linux_syscalls.inc`.
 
 \_\_exit: Exit the program with the error code of 0.
 
+\_\_error\_exit\_generic: Exit the program with the error code of 1.
+
 ### Calls
 
 \_\_check\_error: Executes the `syscall` instruction, then checks if an error was returned.
