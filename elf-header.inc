@@ -3,13 +3,13 @@ org 0x40000
 file_start:
 ;--------ELF HEADER---------
 db 0x7F, "ELF"		; magic
-db 2			; 64-bit
-db 1			; little endian
+db 2			; 64-bit		; Not needed
+db 1			; little endian		; Not needed
 yes_letter:		; ELF v1
 	db "y"
 newline:		; Linux ABI
 	db 10
-__exit_jmp:
+__exit:
 	xor eax, eax	; 2? OS ABI
 __error_exit_jmp:	; padding
 	mov edi, eax	; 2?
@@ -36,16 +36,14 @@ __check_error_after:	; Call this if you process something after the syscall, or 
 __error_exit:		; ELF header size, not needed
 	jmp short __error_exit_jmp
 dw 0x38			; Program header entry size
+
 dw 1			; 1 program header
-__exit:		; Size of section header
-	jmp short __exit_jmp
-dw 0			; Number of section headers
 
 ;-------PROGRAM HEADER---------
 prog_header:
-	dd 1		; Loadable segment		; location of .shstrtab :(
+	dd 1		; Loadable segment		; Size of section header, Number of section headers
 %ifdef WRITE_EXEC
-	dd 7		; RWX
+	dd 7		; RWX				; location of .shstrtab :(
 %else
 	dd 5		; RX
 %endif

@@ -10,21 +10,21 @@ You will probably need some kernel flags set to get it to run without errors.
 
 ## Current List
 - cat
-	- takes up 210 bytes
+	- takes up 206 bytes
 - mkdir, rmdir, touch, rm
 	- rm and rmdir take up 145 bytes, while touch and mkdir take up 150 bytes
 	- all based on the same piece of code at `mkrmdirfile/base.asm`
 - yes
-	- takes up 162 bytes
+	- takes up 158 bytes
 	- The string printed is comprised of the first argument, so you should put everything you want to print in quotes
 - clear
-	- takes up 137 bytes
+	- takes up 133 bytes
 	- Has 3 less options than the ncurses version, but I don't think anyone should need them.
 - true
-	- takes up 118 bytes
+	- takes up 114 bytes
 	- Cannot be reduced even further without a change to the ELF header, or to the kernel
 - false
-	- takes up 118 bytes
+	- takes up 114 bytes
 	- Same problem as true
 
 ## Disclaimer
