@@ -1,9 +1,12 @@
 # mini-utils
+Notice: This repository is not to be considered dead, but finished.
+
 This is a set of small commands I am making to learn x86\_64 assembly for Linux.
 I want all of these to be as small as possible, meaning there are very few features, unlike GNU Coreutils, for example.
 
 ## Build
 The only packages you need are `make` and `nasm`.
+Alternatively, you can run `nix build` to build the programs.
 
 There is an experimental x32 port of the binaries in the `x32/` directory.
 You will probably need some kernel flags set to get it to run without errors.
@@ -33,9 +36,4 @@ I will not attempt to accomodate for this because my it works on my machine.
 I will not accept pull requests to appease those computers unless the programs are smaller afterward.
 
 ## Contact
-If you need support, or just want to say something, you can contact me in these ways, sorted from most likely to respond to least likely to respond:
-1. Discord: imclevor
-
-2. Email: my Github username but I use Google's service
-
-3. IRC: clevor@EFnet assuming my IRC client doesn't shut down AND I read it AND someone doesn't impersonate me
+If you need support, or just want to say something, you can contact me via clevor@EFNet.
