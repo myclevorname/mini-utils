@@ -30,8 +30,8 @@ __exit_p3:		; Section header table offset
 __check_error:
 	syscall
 __check_error_after:	; Call this if you process something after the syscall, or jump to __error_exit_jmp
-	cmp ah, -16	; AMD64 flags
-	jae __error_exit_jmp
+	test rax, rax	; AMD64 flags
+	js __error_exit_jmp
 	ret
 __error_exit:		; ELF header size, not needed
 	jmp short __error_exit_jmp
@@ -50,10 +50,10 @@ prog_header:
 	dq 0		; offset in file
 	dq $$		; location in memory
 __exit_p2:		; Physical address, irrelevant
-	btr sp, 3	; 5
+	and sp, -16	; 4
 	jmp short __exit_p3		; 2
 
-	db 0
+	dw 0
 	dq _end-$$	; Size in file
 %ifdef _bss_end
 	dq _bss_end-$$	; Size in memory

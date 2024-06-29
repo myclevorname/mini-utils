@@ -10,6 +10,7 @@ x32/bin/
 yes/yes
 clear/clear
 true/true
+false/false
 # Just run make clean please
 
 # Projects that are not started and/or incomplete
