@@ -1,6 +1,6 @@
 # cat
 A miniature cat program written in x86_64 assembly for Linux.
-It currently compiles to just 210 bytes!
+It currently compiles to just 206 bytes!
 It doesn't use the C standard library, only Linux syscalls.
 
 ## Usage

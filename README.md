@@ -15,7 +15,7 @@ You will probably need some kernel flags set to get it to run without errors.
 - cat
 	- takes up 206 bytes
 - mkdir, rmdir, touch, rm
-	- rm and rmdir take up 145 bytes, while touch and mkdir take up 150 bytes
+	- rm and rmdir take up 141 bytes, while touch and mkdir take up 146 bytes
 	- all based on the same piece of code at `mkrmdirfile/base.asm`
 - yes
 	- takes up 158 bytes

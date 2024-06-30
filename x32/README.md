@@ -7,21 +7,21 @@ The only packages you need are `make` and `nasm`.
 
 ## Current List
 - cat
-	- takes up 183 bytes
+	- takes up 171 bytes
 - mkdir, rmdir, touch, rm
-	- rm and rmdir take up 115 bytes, while touch and mkdir take up 120 bytes
+	- rm and rmdir take up 103 bytes, while touch and mkdir take up 108 bytes
 	- all based on the same piece of code at `mkrmdirfile/base.asm`
 - yes
-	- takes up 138 bytes
+	- takes up 126 bytes
 	- The string printed is comprised of the first argument, so you should put everything you want to print in quotes
 - clear
-	- takes up 111 bytes
+	- takes up 99 bytes
 	- Has 3 less options than the ncurses version, but I don't think anyone should need them.
 - true
-	- Takes up 85 bytes
+	- Takes up 73 bytes
 	- All it does is jump to the exit routine, which conveniently returns zero.
 - false
-	- Takes up 85 bytes
+	- Takes up 73 bytes
 	- Returns 1 instead of 0, unlike true
 
 ## Disclaimer
