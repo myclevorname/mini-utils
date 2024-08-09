@@ -6,16 +6,22 @@
   };
 
   outputs = { self, nixpkgs }: {
-    packages.x86_64-linux.default =
-      with import nixpkgs { system = "x86_64-linux"; };
-      stdenv.mkDerivation {
+    packages.x86_64-linux = with import nixpkgs { system = "x86_64-linux"; }; rec {
+      default = mini-utils;
+      mini-utils = stdenv.mkDerivation {
         name = "mini-utils";
+        enableParallelBuilding = true;
         src = self;
         installPhase = ''
-          mkdir -p $out/bin
-          cp bin/* $out/bin
+          mkdir -p $out
+          cp -r bin $out
         '';
         nativeBuildInputs = with pkgs; [ nasm ];
+      };
+      mini-utils-x32 = mini-utils.overrideAttrs {
+        name = "mini-utils-x32";
+        src = "${self}/x32";
+      };
     };
   };
 }
