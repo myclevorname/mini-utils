@@ -22,10 +22,10 @@ hello_end:
 
 	; Writable data goes here if you uncomment the top line.
 _end:
-
-	; bss goes here, but in a weird way because of nasm's preprocessor.
+section .bss
+	; bss goes here
 var_1:
-	; 1 byte
+	resb 1
 var_2 equ var_1 + 1
-	; 2 bytes
-_bss_end equ var_2 + 2
+	resb 2
+_bss_end:

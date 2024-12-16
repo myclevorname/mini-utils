@@ -66,5 +66,6 @@ write_stdout:
 
 	jmp short read_file
 _end:
-file_buffer:
-_bss_end equ file_buffer + FILE_READ_SIZE
+file_buffer:		; I can't use section .bss due to some "scalar value" error
+
+_bss_end equ file_buffer + 4096

@@ -66,5 +66,7 @@ write_stdout:
 
 	jmp short read_file
 _end:
+section .bss
 file_buffer:
-_bss_end equ file_buffer + FILE_READ_SIZE
+	resb 4096
+_bss_end:
