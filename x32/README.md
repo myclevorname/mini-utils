@@ -15,7 +15,7 @@ The only packages you need are `make` and `nasm`.
 	- takes up 126 bytes
 	- The string printed is comprised of the first argument, so you should put everything you want to print in quotes
 - clear
-	- takes up 99 bytes
+	- takes up 75 bytes
 	- Has 3 less options than the ncurses version, but I don't think anyone should need them.
 - true
 	- Takes up 73 bytes
@@ -36,8 +36,9 @@ so make sure you have those changes applied before you ask for help.
 
 ## Contact
 If you need support, or just want to say something, you can contact me in these ways, sorted from most likely to respond to least likely to respond:
-1. Discord: imclevor
+1. IRC: clevor@EFnet
+
+2. Discord: imclevor
 
 2. Email: my Github username but I use Google's service
 
-3. IRC: clevor@EFnet assuming my IRC client doesn't shut down AND I read it AND someone doesn't impersonate me
